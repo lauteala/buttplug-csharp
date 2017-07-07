@@ -22,29 +22,15 @@ namespace ButtplugControlLibrary
     /// </summary>
     public partial class ButtplugTabControl : IButtplugServiceFactory
     {
-        [NotNull]
-        private readonly RavenClient _ravenClient;
+
         [NotNull]
         private readonly Logger _guiLog;
         private int _releaseId;
         private string _serverName;
         private uint _maxPingTime;
-        private bool _sentCrashLog;
 
         public ButtplugTabControl()
         {
-            _ravenClient = new RavenClient("https://2e376d00cdcb44bfb2140c1cf000d73b:1fa6980aeefa4b048b866a450ee9ad71@sentry.io/170313");
-
-            // Cover all of the possible bases for WPF failure
-            // http://stackoverflow.com/questions/12024470/unhandled-exception-still-crashes-application-after-being-caught
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
-
-            // Null check application, otherwise test bringup for GUI tests will fail
-            if (Application.Current != null)
-            {
-                Application.Current.DispatcherUnhandledException += CurrentOnDispatcherUnhandledException;
-            }
-
             _guiLog = LogManager.GetCurrentClassLogger();
             LogManager.Configuration = LogManager.Configuration ?? new LoggingConfiguration();
 #if DEBUG
@@ -105,52 +91,6 @@ namespace ButtplugControlLibrary
 
             bpServer.AddDeviceSubtypeManager(aLogger => new XInputGamepadManager(aLogger));
             return bpServer;
-        }
-
-        private void SendExceptionToSentry(Exception aEx)
-        {
-            if (_sentCrashLog)
-            {
-                return;
-            }
-
-            _sentCrashLog = true;
-            AppDomain.CurrentDomain.UnhandledException -= CurrentDomainOnUnhandledException;
-            if (Application.Current != null)
-            {
-                Application.Current.DispatcherUnhandledException -= CurrentOnDispatcherUnhandledException;
-            }
-
-            if (Dispatcher != null)
-            {
-                Dispatcher.UnhandledException -= DispatcherOnUnhandledException;
-            }
-
-            var result = MessageBox.Show("An error was encountered! Do you want to report this to the developers?", "Error encountered", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-            {
-                if (LogControl != null)
-                {
-                    aEx.Data.Add("LogMessages", string.Join("\n", LogControl.GetLogs()));
-                }
-
-                _ravenClient.Capture(new SentryEvent(aEx));
-            }
-        }
-
-        private void DispatcherOnUnhandledException(object aObj, DispatcherUnhandledExceptionEventArgs aEx)
-        {
-            SendExceptionToSentry(aEx.Exception);
-        }
-
-        private void CurrentDomainOnUnhandledException(object aObj, UnhandledExceptionEventArgs aEx)
-        {
-            SendExceptionToSentry(aEx.ExceptionObject as Exception);
-        }
-
-        private void CurrentOnDispatcherUnhandledException(object aObj, DispatcherUnhandledExceptionEventArgs aEx)
-        {
-            SendExceptionToSentry(aEx.Exception);
         }
 
         private void CrashButton_Click(object aSender, RoutedEventArgs aEvent)
