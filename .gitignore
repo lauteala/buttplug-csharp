@@ -11,3 +11,7 @@ coverage.xml
 /raven-csharp/
 /websocket-sharp/
 *.DotSettings.user
+*EasyHook32*
+*EasyHook64*
+*EasyLoad32*
+*EasyLoad64*
