@@ -36,7 +36,6 @@ namespace Buttplug.Server.Managers.WinUSBManager
         public override void StopScanning()
         {
             // noop
-            BpLogger.Info("WinUSBManager stop scanning");
         }
 
         public override bool IsScanning()
