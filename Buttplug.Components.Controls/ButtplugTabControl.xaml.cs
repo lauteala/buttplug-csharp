@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using Buttplug.Server;
 using Buttplug.Server.Managers.UWPBluetoothManager;
 using Buttplug.Server.Managers.XInputGamepadManager;
+using Buttplug.Server.Managers.WinUSBManager;
 using JetBrains.Annotations;
 using Microsoft.Win32;
 using NLog;
@@ -136,6 +137,7 @@ namespace Buttplug.Components.Controls
             }
 
             bpServer.AddDeviceSubtypeManager(aLogger => new XInputGamepadManager(aLogger));
+            bpServer.AddDeviceSubtypeManager(aLogger => new WinUSBManager(aLogger));
             return bpServer;
         }
 

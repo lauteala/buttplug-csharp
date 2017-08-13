@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buttplug.Apps.XInputInjecto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buttplug.Apps.XInputInjector.Interface", "Buttplug.Apps.XInputInjector.Interface\Buttplug.Apps.XInputInjector.Interface.csproj", "{9837DF40-954F-4FD5-BAB8-4026359F89E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buttplug.Server.Managers.WinUSBManager", "Buttplug.Server.Managers.WinUSBManager\Buttplug.Server.Managers.WinUSBManager.csproj", "{0F5DAB4B-184B-4B7E-9F40-339C7F5E216F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{9837DF40-954F-4FD5-BAB8-4026359F89E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9837DF40-954F-4FD5-BAB8-4026359F89E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9837DF40-954F-4FD5-BAB8-4026359F89E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F5DAB4B-184B-4B7E-9F40-339C7F5E216F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F5DAB4B-184B-4B7E-9F40-339C7F5E216F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F5DAB4B-184B-4B7E-9F40-339C7F5E216F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F5DAB4B-184B-4B7E-9F40-339C7F5E216F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
