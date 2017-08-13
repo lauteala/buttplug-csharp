@@ -28,6 +28,7 @@ namespace Buttplug.Apps.XInputInjector.Payload
             RemoteHooking.IContext aInContext,
             String aInArg1)
         {
+            _interface.Ping(RemoteHooking.GetCurrentProcessId(), "Payload installed. Running payload loop.");
             try
             {
                 _xinputSetStateHookObj = LocalHook.Create(
@@ -64,12 +65,12 @@ namespace Buttplug.Apps.XInputInjector.Payload
                         break;
                     }
                 }
-                _interface.Ping(RemoteHooking.GetCurrentProcessId(), "Exiting!");
             }
             catch (Exception e)
             {
                 _interface.ReportError(RemoteHooking.GetCurrentProcessId(), e);
             }
+            _interface.Ping(RemoteHooking.GetCurrentProcessId(), "Exiting payload loop");
         }
 
         [DllImport("xinput1_3.dll", CallingConvention = CallingConvention.StdCall, EntryPoint = "XInputSetState")]
