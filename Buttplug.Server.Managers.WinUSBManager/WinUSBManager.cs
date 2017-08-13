@@ -22,6 +22,11 @@ namespace Buttplug.Server.Managers.WinUSBManager
             // Only valid for our Trancevibrator install
             var TrancevibratorDeviceID = "{3420AFC8-06B8-4215-97C2-8E59F6C16606}";
             var device = USBDevice.GetSingleDevice(TrancevibratorDeviceID);
+            if (device == null)
+            {
+                BpLogger.Error("No USB Device found!");
+                return;
+            }
             BpLogger.Debug($"Found TranceVibrator Device");
             var tvDevice = new WinUSBDevice(LogManager, device);
             InvokeDeviceAdded(new DeviceAddedEventArgs(tvDevice));

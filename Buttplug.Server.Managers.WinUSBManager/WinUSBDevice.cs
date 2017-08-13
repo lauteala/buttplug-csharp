@@ -34,8 +34,14 @@ namespace Buttplug.Server.Managers.WinUSBManager
             {
                 return Task.FromResult<ButtplugMessage>(BpLogger.LogErrorMsg(aMsg.Id, Error.ErrorClass.ERROR_DEVICE, "Wrong Handler"));
             }
-
-            
+            byte speed = (byte)Math.Floor(cmdMsg.Speed * 255);
+            _device.ControlOut(
+                (0x02) << 5 | // Vendor Type
+                (0x01) | // Interface Recipient
+                (0x00), // Out Enpoint
+                1,
+                speed,
+                0);
             return Task.FromResult<ButtplugMessage>(new Ok(aMsg.Id));
         }
 
