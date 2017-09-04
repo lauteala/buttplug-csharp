@@ -6,6 +6,7 @@ using Buttplug.Core.Messages;
 
 namespace Buttplug.Server.Bluetooth.Devices
 {
+    /*
     internal class VibratissimoBluetoothInfo : IBluetoothDeviceInfo
     {
         public enum Chrs : uint
@@ -81,4 +82,5 @@ namespace Buttplug.Server.Bluetooth.Devices
                 data);
         }
     }
+    */
 }
