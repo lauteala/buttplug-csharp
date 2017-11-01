@@ -671,12 +671,12 @@ namespace Buttplug.Core.Messages
         }
 
         [JsonProperty(Required = Required.Always)]
-        public List<VectoreIndex> Speeds;
+        public List<VectoreIndex> Vectors;
 
-        public LinearCmd(uint aDeviceIndex, List<VectoreIndex> aSpeeds, uint aId = ButtplugConsts.DefaultMsgId)
+        public LinearCmd(uint aDeviceIndex, List<VectoreIndex> aVectors, uint aId = ButtplugConsts.DefaultMsgId)
             : base(aId, aDeviceIndex)
         {
-            Speeds = aSpeeds;
+            Vectors = aVectors;
             MessageVersioningVersion = 1;
         }
     }
